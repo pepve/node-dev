@@ -41,6 +41,25 @@ are watched:
 By default node-dev will watch all first-level dependencies, i.e. the ones in
 the project's `node_modules`folder.
 
+Node-dev can also be used when your node process runs in VirtualBox but you're
+doing your development outside of it (with your project directory shared
+through vboxsf or NFS). You have to `npm install -g remote-filewatcher` on the
+host OS. Then inside the vm you run `node-dev --remote project-dir/script.js`
+and on the host OS you run `remote-filewatcher project-dir`. The options for
+node-dev are:
+
+* `--remote` Use [remote-filewatcher](https://www.npmjs.org/package/remote-filewatcher)
+  instead of [filewatcher](https://www.npmjs.org/package/filewatcher), so that
+  files on another host can be watched.
+* `--remote-port` The port number remote-filewatcher is listening on, defaults
+  to 54545.
+* `--remote-host` The host where remote-filewatcher is running, defaults to
+  10.0.2.2 which maps to localhost on the host OS from within VirtualBox vms.
+
+The first argument to remote-filewatcher is the project directory, optionally
+followed by a port number and a listen address which default to 54545 and
+localhost.
+
 
 # Installation
 
